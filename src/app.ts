@@ -47,19 +47,6 @@ app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'ok' });
 });
 
-// Rota não encontrada
-app.use((req: Request, res: Response) => {
-  res.status(404).json({ message: 'Rota não encontrada' });
-});
-
-// Erro global
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Erro interno do servidor' });
-});
-
-
-
 app.get("/demo/seguro", async (req, res) => {
   const payload = {
     transactionId: "TXN-123",
@@ -95,6 +82,17 @@ app.get("/demo/vulneravel", async (req, res) => {
     payload,
     diagnostic
   });
+});
+
+// Rota não encontrada
+app.use((req: Request, res: Response) => {
+  res.status(404).json({ message: 'Rota não encontrada' });
+});
+
+// Erro global
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Erro interno do servidor' });
 });
 
 export default app;
