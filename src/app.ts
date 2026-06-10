@@ -5,10 +5,11 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
 
-
 import {cerberusMiddleware} from "./middlewares/CerberusMW.js";
 import generationRoutes from "./routes/generationRoutes.js";
 import analysisRoutes from "./routes/analysisRoutes.js";
+
+import { analisarPayload } from "./services/analysisService.js";
 
 dotenv.config();
 
@@ -55,6 +56,45 @@ app.use((req: Request, res: Response) => {
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).json({ message: 'Erro interno do servidor' });
+});
+
+
+
+app.get("/demo/seguro", async (req, res) => {
+  const payload = {
+    transactionId: "TXN-123",
+    amount: 99.90,
+    currency: "BRL",
+    status: "approved"
+  };
+
+  const diagnostic = await analisarPayload(
+    JSON.stringify(payload)
+  );
+
+  res.json({
+    payload,
+    diagnostic
+  });
+});
+
+app.get("/demo/vulneravel", async (req, res) => {
+  const payload = {
+    transactionId: "",
+    amount: -5000,
+    currency: "BRL",
+    status: "approved",
+    sql: "' OR 1=1 --"
+  };
+
+  const diagnostic = await analisarPayload(
+    JSON.stringify(payload)
+  );
+
+  res.json({
+    payload,
+    diagnostic
+  });
 });
 
 export default app;
