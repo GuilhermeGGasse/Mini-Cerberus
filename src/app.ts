@@ -26,6 +26,21 @@ app.use("/api", cerberusMiddleware);
 app.use("/api/analysis", analysisRoutes);
 app.use("/api/generation", generationRoutes);
 
+app.get("/", (req: Request, res: Response) => {
+  res.status(200).json({
+    name: "Mini Cerberus",
+    status: "online",
+    version: "1.0.0",
+    endpoints: [
+      "/health",
+      "/api/analysis/check",
+      "/api/generation/report",
+      "/api/generation/suggestions",
+      "/api/generation/examples"
+    ]
+  });
+});
+
 // Rota de health check
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'ok' });
