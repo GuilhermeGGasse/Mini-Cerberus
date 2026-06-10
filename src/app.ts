@@ -49,13 +49,19 @@ app.get('/health', (req: Request, res: Response) => {
 
 app.get("/demo/seguro", async (req, res) => {
   const payload = {
-    "transactionId": "TXN-123",
+    "transactionId": "TXN-123456789",
+    "merchantId": "MERCHANT-001",
+    "customerId": "CUS-456789",
     "amount": 99.90,
     "currency": "BRL",
     "status": "approved",
-    "timestamp": "2026-06-10T12:00:00Z",
-    "signature": "sha256_abcdef123456",
-    "merchantId": "MERCHANT-001"
+    "timestamp": "2026-06-10T18:30:00Z",
+    "eventId": "EVT-987654321",
+    "signature": "sha256_9f8d7c6b5a4e3f2d1c0b",
+    "nonce": "abc123xyz456",
+    "source": "payment-gateway",
+    "environment": "production",
+    "version": "1.0"
   };
 
   const diagnostic = await analisarPayload(
