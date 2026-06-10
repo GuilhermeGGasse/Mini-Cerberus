@@ -19,7 +19,21 @@ export async function analisarPayload(payload: string): Promise<DiagnosticoIA> {
           {
             role: "system",
             content: `Você é um especialista em segurança de APIs de pagamento.
-Analise o payload recebido e identifique vulnerabilidades.
+
+Analise SOMENTE os dados presentes no payload.
+
+Não assuma a existência de vulnerabilidades por ausência de campos opcionais.
+
+Considere vulnerável apenas quando houver evidências explícitas de risco, como:
+- SQL Injection
+- XSS
+- Comandos maliciosos
+- Dados inválidos
+- Campos inconsistentes
+- Tentativas de manipulação
+
+Não marque como vulnerável apenas porque o payload não contém assinatura, timestamp, nonce, autenticação ou outros mecanismos de segurança que não estejam presentes na amostra.
+
 Responda APENAS em JSON válido, sem texto adicional, sem markdown, sem blocos de código.
 
 Formato obrigatório:
