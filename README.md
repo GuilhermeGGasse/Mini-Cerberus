@@ -215,6 +215,21 @@ O objetivo é explorar como modelos de IA podem auxiliar na identificação de p
 
 ---
 
+## Demostração
+
+Segue abaixo 2 exemplos de testes de payloads que podem ser visualizados no código fonte do projeto.
+
+Cole no navegador e verás a demonstração de resposta do Groq. O primeiro link resultará em uma resposta positiva.
+O segundo resultará na resposta negativa. Veja:
+
+https://mini-cerberus.onrender.com/demo/seguro
+
+https://mini-cerberus.onrender.com/demo/vulneravel
+
+Ambos podem ser vistos em C:\Mini-Cerberus\src\app.ts a partir da linha 50.
+
+---
+
 ## ⚠️ Aviso
 
 Este projeto é um protótipo educacional e não deve ser utilizado como única camada de segurança em ambientes de produção. Os resultados fornecidos pela IA devem ser revisados e validados por profissionais de segurança quando aplicados a sistemas reais.
